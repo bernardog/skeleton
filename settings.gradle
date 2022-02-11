@@ -9,3 +9,4 @@ rootProject.name = "Squeleton"
 include ':app'
 include ':domain'
 include ':data'
+include ':common'

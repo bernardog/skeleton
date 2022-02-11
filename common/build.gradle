@@ -1,5 +1,5 @@
 plugins {
-    id 'com.android.application'
+    id 'com.android.library'
     id 'kotlin-android'
 }
 
@@ -7,29 +7,24 @@ android {
     compileSdk Versions.compileSdk
 
     defaultConfig {
-        applicationId "com.bernardoghazi.squeleton"
         minSdk Versions.minSdk
         targetSdk Versions.targetSdk
         versionCode AppVersions.code
         versionName AppVersions.name
+
+        consumerProguardFiles "consumer-rules.pro"
     }
 
     buildTypes {
         release {
-            minifyEnabled true
-            shrinkResources true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
-        debug {
-            debuggable true
-        }
     }
-
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-
     kotlinOptions {
         jvmTarget = '1.8'
     }
@@ -39,8 +34,4 @@ dependencies {
 
     implementation AndroidLibs.coreKtx
     implementation AndroidLibs.material
-
-    implementation project(':common')
-    implementation project(':domain')
-    implementation project(':data')
 }
