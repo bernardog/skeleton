@@ -1,5 +1,5 @@
 plugins {
-    id 'com.android.application'
+    id 'com.android.library'
     id 'kotlin-android'
 }
 
@@ -7,13 +7,13 @@ android {
     compileSdk Versions.compileSdk
 
     defaultConfig {
-        applicationId "com.bernardoghazi.squeleton"
         minSdk Versions.minSdk
         targetSdk Versions.targetSdk
         versionCode AppVersions.code
         versionName AppVersions.name
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
     }
 
     buildTypes {
@@ -34,5 +34,5 @@ android {
 dependencies {
 
     implementation AndroidLibs.coreKtx
-    implementation AndroidLibs.material
+//    implementation AndroidLibs.appCompat
 }
