@@ -7,7 +7,7 @@ android {
     compileSdk Versions.compileSdk
 
     defaultConfig {
-        applicationId "com.bernardoghazi.squeleton"
+        applicationId "com.bernardoghazi.skeleton"
         minSdk Versions.minSdk
         targetSdk Versions.targetSdk
         versionCode AppVersions.code
