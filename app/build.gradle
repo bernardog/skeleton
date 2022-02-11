@@ -12,8 +12,6 @@ android {
         targetSdk Versions.targetSdk
         versionCode AppVersions.code
         versionName AppVersions.name
-
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
