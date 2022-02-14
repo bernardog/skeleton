@@ -6,7 +6,9 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "Skeleton"
-include ':app'
+include ':mobile'
 include ':domain'
 include ':data'
 include ':common'
+include ':tv'
+include ':viewmodels'
