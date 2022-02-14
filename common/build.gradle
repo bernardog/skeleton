@@ -9,9 +9,6 @@ android {
     defaultConfig {
         minSdk Versions.minSdk
         targetSdk Versions.targetSdk
-        versionCode AppVersions.code
-        versionName AppVersions.name
-
         consumerProguardFiles "consumer-rules.pro"
     }
 

@@ -10,8 +10,11 @@ android {
         applicationId "com.bernardoghazi.skeleton"
         minSdk Versions.minSdk
         targetSdk Versions.targetSdk
-        versionCode AppVersions.code
-        versionName AppVersions.name
+        versionCode AppVersions.codeMobile
+        versionName AppVersions.nameMobile
+
+        Properties properties = new Properties()
+        properties.load(project.rootProject.file('local.properties').newDataInputStream())
     }
 
     buildTypes {
