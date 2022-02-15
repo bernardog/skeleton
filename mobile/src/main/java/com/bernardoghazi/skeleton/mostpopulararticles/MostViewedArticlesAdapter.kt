@@ -1,12 +1,12 @@
-package com.bernardoghazi.skeleton.mostviewedarticles
+package com.bernardoghazi.skeleton.mostpopulararticles
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bernardoghazi.skeleton.common.ImageLoader
-import com.bernardoghazi.skeleton.databinding.MostViewedArticlesFragmentArticleItemBinding
-import com.bernardoghazi.skeleton.databinding.MostViewedArticlesFragmentDividerItemBinding
-import com.bernardoghazi.skeleton.databinding.MostViewedArticlesFragmentHeaderItemBinding
+import com.bernardoghazi.skeleton.databinding.MostPopularArticlesFragmentArticleItemBinding
+import com.bernardoghazi.skeleton.databinding.MostPopularArticlesFragmentDividerItemBinding
+import com.bernardoghazi.skeleton.databinding.MostPopularArticlesFragmentHeaderItemBinding
 import com.bernardoghazi.skeleton.domain.models.Article
 import com.bernardoghazi.skeleton.domain.models.Content
 import com.bernardoghazi.skeleton.domain.models.Header
@@ -14,7 +14,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import java.text.ParseException
 
-class MostViewedArticlesAdapter(
+class MostPopularArticlesAdapter(
     private val externalScope: CoroutineScope,
 //    private val fetchSubscribersCount: suspend (String) -> UseCaseOutcome<Int>,
     private val onItemClick: suspend (Article) -> Unit,
@@ -49,7 +49,7 @@ class MostViewedArticlesAdapter(
         return when (viewType) {
             ViewType.HEADER.ordinal -> {
                 HeaderViewHolder(
-                    MostViewedArticlesFragmentHeaderItemBinding.inflate(
+                    MostPopularArticlesFragmentHeaderItemBinding.inflate(
                         LayoutInflater.from(parent.context),
                         parent,
                         false
@@ -58,7 +58,7 @@ class MostViewedArticlesAdapter(
             }
             ViewType.ARTICLE.ordinal -> {
                 ArticleViewHolder(
-                    MostViewedArticlesFragmentArticleItemBinding.inflate(
+                    MostPopularArticlesFragmentArticleItemBinding.inflate(
                         LayoutInflater.from(parent.context),
                         parent,
                         false
@@ -67,7 +67,7 @@ class MostViewedArticlesAdapter(
             }
             else -> {
                 DividerViewHolder(
-                    MostViewedArticlesFragmentDividerItemBinding.inflate(
+                    MostPopularArticlesFragmentDividerItemBinding.inflate(
                         LayoutInflater.from(parent.context),
                         parent,
                         false
@@ -93,7 +93,7 @@ class MostViewedArticlesAdapter(
     }
 
     //TODO: keep top margin only when it's not the first header in the list.
-    private inner class HeaderViewHolder(private val binding: MostViewedArticlesFragmentHeaderItemBinding) :
+    private inner class HeaderViewHolder(private val binding: MostPopularArticlesFragmentHeaderItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(header: Header) {
             try {
@@ -104,7 +104,7 @@ class MostViewedArticlesAdapter(
         }
     }
 
-    private inner class ArticleViewHolder(private val binding: MostViewedArticlesFragmentArticleItemBinding) :
+    private inner class ArticleViewHolder(private val binding: MostPopularArticlesFragmentArticleItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(article: Article) {
 
@@ -128,6 +128,6 @@ class MostViewedArticlesAdapter(
         }
     }
 
-    private inner class DividerViewHolder(binding: MostViewedArticlesFragmentDividerItemBinding) :
+    private inner class DividerViewHolder(binding: MostPopularArticlesFragmentDividerItemBinding) :
         RecyclerView.ViewHolder(binding.root)
 }

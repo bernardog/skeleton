@@ -7,5 +7,5 @@ interface NewsRepository {
     /**
      * Fetches posts from the backend, and returns them mapped to a list of [Article], or null in case of error.
      * */
-    suspend fun fetchMostViewedArticles(): List<Article>?
+    suspend fun fetchMostPopularArticles(): List<Article>?
 }

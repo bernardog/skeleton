@@ -50,7 +50,7 @@ val dataModule = module {
     single {
         Interceptor { chain ->
             var request: Request = chain.request()
-            val url: HttpUrl = request.url.newBuilder().addQueryParameter("api-key", BuildConfig.MOST_VIEWED_API_KEY).build()
+            val url: HttpUrl = request.url.newBuilder().addQueryParameter("api-key", BuildConfig.MOST_POPULAR_API_KEY).build()
             request = request.newBuilder().url(url).build()
             chain.proceed(request)
         }

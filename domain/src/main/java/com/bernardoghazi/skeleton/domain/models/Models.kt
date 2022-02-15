@@ -16,8 +16,3 @@ data class Article(
 ) : Content()
 
 object Divider : Content()
-
-data class Author(
-    val url: String,
-    val name: String
-)

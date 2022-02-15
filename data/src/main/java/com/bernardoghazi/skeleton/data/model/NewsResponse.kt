@@ -2,7 +2,7 @@ package com.bernardoghazi.skeleton.data.model
 
 import com.google.gson.annotations.SerializedName
 
-data class MostViewedArticlesResponse(
+data class MostPopularArticlesResponse(
     val status: String,
     val copyright: String,
     @SerializedName("num_results") val numResults: Int,

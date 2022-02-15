@@ -3,16 +3,33 @@ package com.bernardoghazi.skeleton.domain.usecases
 import com.bernardoghazi.skeleton.domain.models.*
 import com.bernardoghazi.skeleton.domain.repositories.NewsRepository
 
+
+fun main() {
+    val list = listOf(
+        "2022-02-15 09:00:00",
+        "2022-02-15 10:00:00",
+        "2022-02-15 11:00:00",
+        "2022-02-14 09:00:00",
+        "2022-02-13 10:00:00",
+        "2022-02-13 09:00:00",
+    )
+
+    val sortedBy = list.sortedBy { it }
+
+    sortedBy.forEach { println(it) }
+}
+
+
 /**
- * TODO: Use case responsible for fetching the posts from the backend (through the [newsRepository]), and returning an ordered list of [Content]
+ * TODO: Use case responsible for fetching the articles from the backend (through the [newsRepository]), and returning an ordered list of [Content]
  * made up of headers, posts and dividers.
  * */
-class FetchMostViewedArticlesUseCase(
+class FetchMostPopularArticlesUseCase(
     private val newsRepository: NewsRepository,
-    private val errorMessage: String = "erro"
+    private val errorMessage: String = "erro"//TODO
 ) {
     suspend operator fun invoke(): UseCaseOutcome<List<Content>> {
-        val articles: List<Article>? = newsRepository.fetchMostViewedArticles()
+        val articles: List<Article>? = newsRepository.fetchMostPopularArticles()?.sortedByDescending { it.updatedAt }
         val content: MutableList<Content> = mutableListOf()
 
         articles?.forEachIndexed { index, post ->

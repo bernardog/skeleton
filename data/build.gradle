@@ -13,7 +13,7 @@ android {
 
         def localProperties = new Properties()
         localProperties.load(new FileInputStream(rootProject.file("local.properties")))
-        buildConfigField("String", "MOST_VIEWED_API_KEY", "\"" + localProperties['MOST_VIEWED_API_KEY'] + "\"")
+        buildConfigField("String", "MOST_POPULAR_API_KEY", "\"" + localProperties['MOST_POPULAR_API_KEY'] + "\"")
     }
 
     buildTypes {

@@ -7,7 +7,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/list"
-        android:name="com.bernardoghazi.skeleton.mostviewedarticles.MostViewedArticlesFragment"
+        android:name="com.bernardoghazi.skeleton.mostpopulararticles.MostPopularArticlesFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </FrameLayout>

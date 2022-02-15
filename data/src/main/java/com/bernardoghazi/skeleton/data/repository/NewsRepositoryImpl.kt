@@ -1,23 +1,23 @@
 package com.bernardoghazi.skeleton.data.repository
 
 import com.bernardoghazi.skeleton.data.model.ArticleResponse
-import com.bernardoghazi.skeleton.data.model.MostViewedArticlesResponse
+import com.bernardoghazi.skeleton.data.model.MostPopularArticlesResponse
 import com.bernardoghazi.skeleton.data.remote.NewsService
 import com.bernardoghazi.skeleton.domain.models.Article
 import com.bernardoghazi.skeleton.domain.repositories.NewsRepository
 
 class NewsRepositoryImpl(private val newsService: NewsService) : NewsRepository {
 
-    override suspend fun fetchMostViewedArticles(): List<Article>? {
-        val mostViewedArticlesResponse: MostViewedArticlesResponse?
+    override suspend fun fetchMostPopularArticles(): List<Article>? {
+        val mostPopularArticlesResponse: MostPopularArticlesResponse?
         try {
-            mostViewedArticlesResponse = newsService.fetchMostViewedArticles()
+            mostPopularArticlesResponse = newsService.fetchMostPopularArticles()
         } catch (e: Exception) {
             e.printStackTrace()
             return null
         }
         val articles: MutableList<Article> = mutableListOf()
-        mostViewedArticlesResponse.articleResponses.forEach { articles.add(mapArticleResponseToArticle(it)) }
+        mostPopularArticlesResponse.articleResponses.forEach { articles.add(mapArticleResponseToArticle(it)) }
         return articles
     }
 
