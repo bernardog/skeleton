@@ -34,4 +34,6 @@ dependencies {
 
     implementation AndroidLibs.coreKtx
     implementation AndroidLibs.material
+    implementation Libs.koin
+    implementation Libs.coil
 }
