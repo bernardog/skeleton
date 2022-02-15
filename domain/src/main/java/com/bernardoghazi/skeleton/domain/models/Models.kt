@@ -1,20 +1,18 @@
 package com.bernardoghazi.skeleton.domain.models
 
-import com.google.gson.annotations.SerializedName
-
 sealed class Content
 
 data class Header(
     val date: String
 ) : Content()
 
-data class Post(
-    val author: Author,
-    val date: String,
-    val excerpt: String,
-    @SerializedName("featured_image") val featuredImage: String,
+data class Article(
+    val url: String,
+    val updatedAt: String,
+    val section: String,
     val title: String,
-    val url: String
+    val abstract: String,
+    val mediaUrl: String
 ) : Content()
 
 object Divider : Content()

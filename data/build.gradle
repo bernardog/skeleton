@@ -10,14 +10,22 @@ android {
         minSdk Versions.minSdk
         targetSdk Versions.targetSdk
         consumerProguardFiles "consumer-rules.pro"
+
+        def localProperties = new Properties()
+        localProperties.load(new FileInputStream(rootProject.file("local.properties")))
+        buildConfigField("String", "MOST_VIEWED_API_KEY", "\"" + localProperties['MOST_VIEWED_API_KEY'] + "\"")
     }
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+        debug {
+            debuggable true
+        }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -30,4 +38,13 @@ android {
 dependencies {
 
     implementation AndroidLibs.coreKtx
+    implementation Libs.okHttp
+    implementation Libs.retrofit
+    implementation Libs.retrofitConverterGson
+    implementation Libs.retrofitCoroutineAdapter
+    implementation Libs.okHttp
+    implementation Libs.okHttpInterceptor
+    implementation Libs.koin
+
+    implementation project(':domain')
 }

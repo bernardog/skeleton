@@ -13,8 +13,7 @@ android {
         versionCode AppVersions.codeMobile
         versionName AppVersions.nameMobile
 
-        Properties properties = new Properties()
-        properties.load(project.rootProject.file('local.properties').newDataInputStream())
+        viewBinding.enabled = true
     }
 
     buildTypes {
@@ -42,8 +41,14 @@ dependencies {
 
     implementation AndroidLibs.coreKtx
     implementation AndroidLibs.material
+    implementation AndroidLibs.lifecycleViewModel
+    implementation AndroidLibs.constraintlayout
+    implementation AndroidLibs.lifecycleRuntime
+
+    implementation Libs.koin
 
     implementation project(':common')
     implementation project(':domain')
     implementation project(':data')
+    implementation project(':viewmodels')
 }

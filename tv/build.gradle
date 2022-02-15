@@ -13,8 +13,7 @@ android {
         versionCode AppVersions.codeTv
         versionName AppVersions.nameTv
 
-        Properties properties = new Properties()
-        properties.load(project.rootProject.file('local.properties').newDataInputStream())
+        viewBinding.enabled = true
     }
 
     buildTypes {
