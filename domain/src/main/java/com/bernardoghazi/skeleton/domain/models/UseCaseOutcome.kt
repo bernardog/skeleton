@@ -6,5 +6,5 @@ package com.bernardoghazi.skeleton.domain.models
  */
 sealed class UseCaseOutcome<T> {
     data class Success<T>(val data: T) : UseCaseOutcome<T>()
-    data class Error<T>(val error: String? = null) : UseCaseOutcome<T>()//TODO: wrap the Throwable instead of only the message.
+    data class Error<T>(val errorStringResId: Int? = null) : UseCaseOutcome<T>()
 }

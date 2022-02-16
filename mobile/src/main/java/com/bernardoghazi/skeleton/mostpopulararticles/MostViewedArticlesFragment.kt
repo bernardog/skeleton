@@ -2,6 +2,7 @@ package com.bernardoghazi.skeleton.mostpopulararticles
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,7 +21,7 @@ class MostPopularArticlesFragment : Fragment() {
     private var _binding: MostPopularArticlesFragmentBinding? = null
     private val binding
         get() = _binding!!
-    private lateinit var postsAdapter: MostPopularArticlesAdapter
+    private lateinit var articlesAdapter: MostPopularArticlesAdapter
     private val viewModel: ArticlesFragmentViewModel by viewModel()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -30,20 +31,20 @@ class MostPopularArticlesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        postsAdapter = MostPopularArticlesAdapter(
+        articlesAdapter = MostPopularArticlesAdapter(
             externalScope = viewLifecycleOwner.lifecycleScope,
 //            fetchSubscribersCount = ::fetchSubscribersCount,
             onItemClick = ::onItemClick,
             imageLoader = ImageLoader(requireContext())
         )
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        binding.recyclerView.adapter = postsAdapter
-        observePosts()
+        binding.recyclerView.adapter = articlesAdapter
+        observeArticles()
     }
 
     override fun onResume() {
         super.onResume()
-        fetchPosts()
+        fetchArticles()
     }
 
     override fun onDestroyView() {
@@ -59,12 +60,16 @@ class MostPopularArticlesFragment : Fragment() {
         requireActivity().startActivity(browseIntent)
     }
 
-    private fun fetchPosts() = viewModel.fetchMostPopularArticles()
-    private fun observePosts() = viewModel.content.observe(viewLifecycleOwner, {
-        if (it is UseCaseOutcome.Success) {
-            postsAdapter.setContent(it.data)
-        } else {
-            //TODO: present error feedback to user.
+    private fun fetchArticles() = viewModel.fetchMostPopularArticles()
+    private fun observeArticles() = viewModel.content.observe(viewLifecycleOwner, {
+        when (it) {
+            is UseCaseOutcome.Success -> {
+                articlesAdapter.setContent(it.data)
+            }
+            is UseCaseOutcome.Error -> {
+                //TODO: present error feedback to user.
+                it.errorStringResId?.let { errorId -> Log.d("temp", resources.getString(errorId)) }
+            }
         }
     })
 

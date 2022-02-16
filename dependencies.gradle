@@ -26,16 +26,11 @@ ext {
             'retrofitCoroutines'   : "0.9.2",
             'gson'                 : "2.8.6",
             'okHttp'               : "4.9.2",
-            'mockk'                : "1.10.0",
             'coil'                 : "1.4.0",
             'leanback'             : "1.0.0",
+            'jUnitVersion'         : "4.13.2",
+            'mockk'                : "1.10.0",
     ]
-
-    TestVersions = [
-            'jUnitVersion': "4.13.2",
-            'androidJunit': "1.1.2",
-    ]
-
 
     AndroidLibs = [
             'appCompat'          : "androidx.appcompat:appcompat:${Versions.appCompat}",
@@ -56,8 +51,6 @@ ext {
             'retrofitCoroutineAdapter': "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:${Versions.retrofitCoroutines}",
             'okHttpInterceptor'       : "com.squareup.okhttp3:logging-interceptor:${Versions.okHttp}",
             'okHttp'                  : "com.squareup.okhttp3:okhttp:${Versions.okHttp}",
-            'mockkAndroid'            : "io.mockk:mockk-android:${Versions.mockk}",
-            'mockk'                   : "io.mockk:mockk:${Versions.mockk}",
             'koin'                    : "io.insert-koin:koin-android:${Versions.koin}",
             'coil'                    : "io.coil-kt:coil:${Versions.coil}",
     ]
@@ -71,6 +64,12 @@ ext {
     ProjectDeps = [
             'androidGradlePlugin': "com.android.tools.build:gradle:${Versions.androidGradlePlugin}",
             'kotlinGradlePlugin' : "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}",
+    ]
+
+    TestLibs = [
+            'JUnit'         : "junit:junit:${Versions.jUnitVersion}",
+            'mockk'         : "io.mockk:mockk:${Versions.mockk}",
+            'coroutinesTest': "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.coroutines}",
     ]
 
 }

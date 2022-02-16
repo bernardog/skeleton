@@ -35,4 +35,9 @@ dependencies {
     implementation KotlinLibs.kotlinCoroutineCore
     implementation Libs.koin
     implementation Libs.gson
+    testImplementation TestLibs.mockk
+    testImplementation TestLibs.JUnit
+    testImplementation TestLibs.coroutinesTest
+
+    implementation project(':common')
 }

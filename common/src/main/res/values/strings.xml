@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Skeleton</string>
+    <string name="error_message">"There's been an error."</string>
 </resources>

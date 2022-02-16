@@ -2,60 +2,65 @@ package com.bernardoghazi.skeleton.domain.usecases
 
 import com.bernardoghazi.skeleton.domain.models.*
 import com.bernardoghazi.skeleton.domain.repositories.NewsRepository
-
-
-fun main() {
-    val list = listOf(
-        "2022-02-15 09:00:00",
-        "2022-02-15 10:00:00",
-        "2022-02-15 11:00:00",
-        "2022-02-14 09:00:00",
-        "2022-02-13 10:00:00",
-        "2022-02-13 09:00:00",
-    )
-
-    val sortedBy = list.sortedBy { it }
-
-    sortedBy.forEach { println(it) }
-}
-
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
+import org.koin.core.qualifier.named
+import java.text.DateFormat
+import java.text.ParseException
+import java.text.SimpleDateFormat
+import java.util.*
 
 /**
- * TODO: Use case responsible for fetching the articles from the backend (through the [newsRepository]), and returning an ordered list of [Content]
+ * Use case responsible for fetching the articles from the backend (through the [newsRepository]), and returning an ordered list of [Content]
  * made up of headers, posts and dividers.
  * */
 class FetchMostPopularArticlesUseCase(
-    private val newsRepository: NewsRepository,
-    private val errorMessage: String = "erro"//TODO
-) {
+    private val newsRepository: NewsRepository
+) : KoinComponent {
+
+    internal val errorMessageResId: Int by inject(named("error_message"))
+
     suspend operator fun invoke(): UseCaseOutcome<List<Content>> {
-        val articles: List<Article>? = newsRepository.fetchMostPopularArticles()?.sortedByDescending { it.updatedAt }
+        val articles: List<Article>? = newsRepository.fetchMostPopularArticles()
+
+        val articlesSorted = articles?.sortedByDescending { it.updatedAt }
+
         val content: MutableList<Content> = mutableListOf()
 
-        articles?.forEachIndexed { index, post ->
-            val currentArticle = articles[index]
+        articlesSorted?.forEachIndexed { index, article ->
+            val currentArticle = articlesSorted[index]
             val previousArticle = (index - 1).let { previousPosition ->
-                if (previousPosition < 0) null else articles[previousPosition]
+                if (previousPosition < 0) null else articlesSorted[previousPosition]
             }
 
             val isNewDay = if (previousArticle == null) {
                 true
             } else {
-                currentArticle.updatedAt.compareTo(previousArticle.updatedAt) != 0
+                removeHoursMinutesSeconds(currentArticle.updatedAt).compareTo(removeHoursMinutesSeconds(previousArticle.updatedAt)) != 0
             }
 
             if (isNewDay) {
-                content.add(createHeader(post))
-                content.add(post)
+                content.add(createHeader(article))
+                content.add(article)
             } else {
                 content.add(createDivider())
-                content.add(post)
+                content.add(article)
             }
         }
 
-        return if (content.size != 0) UseCaseOutcome.Success(content) else UseCaseOutcome.Error(errorMessage)
+        return if (content.size != 0) UseCaseOutcome.Success(content) else UseCaseOutcome.Error(errorMessageResId)
+    }
+
+    internal fun removeHoursMinutesSeconds(dateTime: String): String {
+        try {
+            val date = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(dateTime)
+            return DateFormat.getDateInstance(DateFormat.MEDIUM).format(date)
+        } catch (e: ParseException) {
+            e.printStackTrace()
+        }
+        return Date().toString()
     }
 
     private fun createDivider() = Divider
-    private fun createHeader(article: Article) = Header(date = article.updatedAt)
+    private fun createHeader(article: Article) = Header(date = removeHoursMinutesSeconds(article.updatedAt))
 }
