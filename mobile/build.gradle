@@ -44,8 +44,11 @@ dependencies {
     implementation AndroidLibs.lifecycleViewModel
     implementation AndroidLibs.constraintlayout
     implementation AndroidLibs.lifecycleRuntime
-
     implementation Libs.koin
+
+    testImplementation TestLibs.mockk
+    testImplementation TestLibs.JUnit
+    testImplementation TestLibs.coroutinesTest
 
     implementation project(':common')
     implementation project(':domain')
