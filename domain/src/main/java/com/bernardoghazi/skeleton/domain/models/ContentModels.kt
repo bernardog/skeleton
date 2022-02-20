@@ -11,8 +11,9 @@ data class Article(
     val updatedAt: String,
     val section: String,
     val title: String,
-    val abstract: String,
-    val mediaUrl: String
+    val description: String,
+    val mediaUrl: String?,
+    val byline: String
 ) : Content()
 
 object Divider : Content()

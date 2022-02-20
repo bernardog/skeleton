@@ -18,13 +18,11 @@ class FetchMostPopularArticlesUseCase(
     private val newsRepository: NewsRepository
 ) : KoinComponent {
 
-    internal val errorMessageResId: Int by inject(named("error_message"))
+    private val errorMessageResId: Int by inject(named("error_message"))
 
     suspend operator fun invoke(): UseCaseOutcome<List<Content>> {
         val articles: List<Article>? = newsRepository.fetchMostPopularArticles()
-
         val articlesSorted = articles?.sortedByDescending { it.updatedAt }
-
         val content: MutableList<Content> = mutableListOf()
 
         articlesSorted?.forEachIndexed { index, article ->
@@ -53,7 +51,7 @@ class FetchMostPopularArticlesUseCase(
 
     internal fun removeHoursMinutesSeconds(dateTime: String): String {
         try {
-            val date = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(dateTime)
+            val date: Date = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(dateTime) ?: Date()//TODO: wrong nullability approach.
             return DateFormat.getDateInstance(DateFormat.MEDIUM).format(date)
         } catch (e: ParseException) {
             e.printStackTrace()

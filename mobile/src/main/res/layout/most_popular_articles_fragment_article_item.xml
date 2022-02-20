@@ -27,12 +27,8 @@
         android:layout_width="0dp"
         android:layout_height="24dp"
         android:ellipsize="end"
-        android:paddingStart="8dp"
-        android:paddingLeft="8dp"
-        android:paddingEnd="8dp"
-        android:paddingRight="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/right_guideline"
+        app:layout_constraintStart_toEndOf="@id/left_guideline"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="title" />
 
@@ -46,7 +42,7 @@
         app:layout_constraintTop_toBottomOf="@id/title" />
 
     <TextView
-        android:id="@+id/summary"
+        android:id="@+id/description"
         android:layout_width="0dp"
         android:layout_height="80dp"
         android:layout_marginStart="12dp"
@@ -58,47 +54,13 @@
         app:layout_constraintTop_toTopOf="@id/image" />
 
     <TextView
-        android:id="@+id/author_name_label"
-        android:layout_width="wrap_content"
+        android:id="@+id/byline"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="4dp"
-        android:text="autor"
+        android:layout_marginTop="8dp"
         app:layout_constraintStart_toEndOf="@id/left_guideline"
-        app:layout_constraintTop_toBottomOf="@id/summary" />
+        app:layout_constraintEnd_toStartOf="@id/right_guideline"
+        app:layout_constraintTop_toBottomOf="@id/description"
+        tools:text="byline" />
 
-    <TextView
-        android:id="@+id/author_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingStart="4dp"
-        android:paddingLeft="4dp"
-        android:paddingEnd="4dp"
-        android:paddingRight="4dp"
-        app:layout_constraintBottom_toBottomOf="@id/author_name_label"
-        app:layout_constraintStart_toEndOf="@id/author_name_label"
-        app:layout_constraintTop_toTopOf="@id/author_name_label"
-        tools:text="author name" />
-
-    <TextView
-        android:id="@+id/subscribers_count_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="4dp"
-        android:text="count"
-        app:layout_constraintBottom_toBottomOf="@id/author_name"
-        app:layout_constraintStart_toEndOf="@id/author_name"
-        app:layout_constraintTop_toTopOf="@id/author_name" />
-
-    <TextView
-        android:id="@+id/subscribers_count"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingStart="4dp"
-        android:paddingLeft="4dp"
-        android:paddingEnd="4dp"
-        android:paddingRight="4dp"
-        app:layout_constraintBottom_toBottomOf="@id/subscribers_count_label"
-        app:layout_constraintStart_toEndOf="@id/subscribers_count_label"
-        app:layout_constraintTop_toTopOf="@id/subscribers_count_label"
-        tools:text="Subscribers count" />
 </androidx.constraintlayout.widget.ConstraintLayout>

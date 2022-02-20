@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- TODO: add raw night mode colors and use them below -->
     <!-- Reference Colors -->
     <color name="colorPrimary">@color/purple</color>
     <color name="colorPrimaryDark">@color/purpleDark</color>

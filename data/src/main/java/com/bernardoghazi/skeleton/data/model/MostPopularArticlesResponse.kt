@@ -3,9 +3,6 @@ package com.bernardoghazi.skeleton.data.model
 import com.google.gson.annotations.SerializedName
 
 data class MostPopularArticlesResponse(
-    val status: String,
-    val copyright: String,
-    @SerializedName("num_results") val numResults: Int,
     @SerializedName("results") val articleResponses: List<ArticleResponse>
 )
 
@@ -14,8 +11,9 @@ data class ArticleResponse(
     @SerializedName("updated") val updatedAt: String,
     val section: String,
     val title: String,
-    val abstract: String,
-    val media: List<MediaResponse>
+    @SerializedName("abstract") val description: String,
+    val media: List<MediaResponse>,
+    val byline: String
 )
 
 data class MediaResponse(

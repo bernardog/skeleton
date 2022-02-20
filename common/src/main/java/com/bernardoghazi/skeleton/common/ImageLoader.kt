@@ -14,6 +14,7 @@ class ImageLoader(context: Context) {
         Coil.setImageLoader(
             ImageLoader.Builder(context)
                 .crossfade(true)
+                .error(R.drawable.broken_image)
                 .okHttpClient(
                     OkHttpClient.Builder().cache(
                         CoilUtils.createDefaultCache(context)

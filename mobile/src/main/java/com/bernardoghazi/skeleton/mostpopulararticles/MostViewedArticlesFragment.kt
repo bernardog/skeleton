@@ -33,17 +33,12 @@ class MostPopularArticlesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         articlesAdapter = MostPopularArticlesAdapter(
             externalScope = viewLifecycleOwner.lifecycleScope,
-//            fetchSubscribersCount = ::fetchSubscribersCount,
             onItemClick = ::onItemClick,
             imageLoader = ImageLoader(requireContext())
         )
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerView.adapter = articlesAdapter
         observeArticles()
-    }
-
-    override fun onResume() {
-        super.onResume()
         fetchArticles()
     }
 

@@ -1,7 +1,7 @@
 package com.bernardoghazi.skeleton.data.di
 
 import com.bernardoghazi.skeleton.data.BuildConfig
-import com.bernardoghazi.skeleton.data.remote.NewsService
+import com.bernardoghazi.skeleton.data.remote.MostPopularService
 import com.bernardoghazi.skeleton.data.repository.NewsRepositoryImpl
 import com.bernardoghazi.skeleton.domain.repositories.NewsRepository
 import com.google.gson.Gson
@@ -17,7 +17,6 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-
 const val TIMEOUT = 30L
 const val BASE_URL = "https://api.nytimes.com"
 
@@ -27,13 +26,6 @@ private fun createGson(): Gson {
     return gsonBuilder.create()
 }
 
-private fun configRetrofit(client: OkHttpClient, gson: Gson): Retrofit = Retrofit
-    .Builder()
-    .client(client)
-    .baseUrl(BASE_URL)
-    .addConverterFactory(GsonConverterFactory.create(gson))
-    .addCallAdapterFactory(CoroutineCallAdapterFactory())
-    .build()
 
 val dataModule = module {
 
@@ -67,13 +59,16 @@ val dataModule = module {
     }
 
     single {
-        configRetrofit(
-            client = get(),
-            gson = get()
-        )
+        Retrofit
+            .Builder()
+            .client(get())
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create(get()))
+            .addCallAdapterFactory(CoroutineCallAdapterFactory())
+            .build()
     }
 
-    factory { get<Retrofit>().create(NewsService::class.java) }
+    factory { get<Retrofit>().create(MostPopularService::class.java) }
 
     factory<NewsRepository> { NewsRepositoryImpl(get()) }
 }

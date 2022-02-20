@@ -2,18 +2,17 @@ package com.bernardoghazi.skeleton.data.repository
 
 import com.bernardoghazi.skeleton.data.model.ArticleResponse
 import com.bernardoghazi.skeleton.data.model.MostPopularArticlesResponse
-import com.bernardoghazi.skeleton.data.remote.NewsService
+import com.bernardoghazi.skeleton.data.remote.MostPopularService
 import com.bernardoghazi.skeleton.domain.models.Article
 import com.bernardoghazi.skeleton.domain.repositories.NewsRepository
 
-class NewsRepositoryImpl(private val newsService: NewsService) : NewsRepository {
+class NewsRepositoryImpl(private val mostPopularService: MostPopularService) : NewsRepository {
 
     override suspend fun fetchMostPopularArticles(): List<Article>? {
         val mostPopularArticlesResponse: MostPopularArticlesResponse?
         try {
-            mostPopularArticlesResponse = newsService.fetchMostPopularArticles()
-        } catch (e: Exception) {
-            e.printStackTrace()
+            mostPopularArticlesResponse = mostPopularService.fetchMostPopularArticles()
+        } catch (e: Exception) {//TODO: deal with the error.
             return null
         }
         val articles: MutableList<Article> = mutableListOf()
@@ -21,7 +20,7 @@ class NewsRepositoryImpl(private val newsService: NewsService) : NewsRepository 
         return articles
     }
 
-    /**Maps [articleResponse] to an [Article].*/
+    /**Maps an [articleResponse] to an [Article].*/
     private fun mapArticleResponseToArticle(articleResponse: ArticleResponse): Article {
         with(articleResponse) {
             return Article(
@@ -29,8 +28,9 @@ class NewsRepositoryImpl(private val newsService: NewsService) : NewsRepository 
                 updatedAt = updatedAt,
                 section = section,
                 title = title,
-                abstract = abstract,
-                mediaUrl = media[0].mediaMetadata[2].url,//TODO: crashando aqui com index outofbounds.
+                description = description,
+                mediaUrl = if (media.isNotEmpty()) media[0].mediaMetadata[2].url else null,
+                byline = byline
             )
         }
     }

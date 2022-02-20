@@ -1,8 +1,8 @@
 package com.bernardoghazi.skeleton.domain.models
 
 /**
- * Sealed class that represents the possible outcomes of our use cases, and wraps the appropriate data in case of success, or an error message in
- * case of error.
+ * Sealed class that represents the possible outcomes of our use cases, and wraps the appropriate data in case of success, or an error message
+ * resource in case of error.
  */
 sealed class UseCaseOutcome<T> {
     data class Success<T>(val data: T) : UseCaseOutcome<T>()

@@ -16,14 +16,13 @@ import java.text.ParseException
 
 class MostPopularArticlesAdapter(
     private val externalScope: CoroutineScope,
-//    private val fetchSubscribersCount: suspend (String) -> UseCaseOutcome<Int>,
     private val onItemClick: suspend (Article) -> Unit,
     private val imageLoader: ImageLoader
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var content: MutableList<Content> = mutableListOf()
 
-    fun setContent(posts: List<Content>) {
+    fun setContent(posts: List<Content>) {//TODO: diff content to update only what's needed.
         this.content.clear()
         this.content.addAll(posts)
         notifyDataSetChanged()
@@ -111,20 +110,10 @@ class MostPopularArticlesAdapter(
             with(binding) {
                 root.setOnClickListener { externalScope.launch { onItemClick(article) } }
                 title.text = article.title
-                summary.text = article.abstract
-                authorName.text = article.mediaUrl
-                with(article.mediaUrl) { if (this.isNotEmpty()) imageLoader.loadImageByUrl(this, image) }
+                description.text = article.description
+                byline.text = article.byline
+                imageLoader.loadImageByUrl(article.mediaUrl ?: "error", image)
             }
-
-//            externalScope.launch {
-//                fetchSubscribersCount(Uri.parse(article.author.url).host.toString()).let { outcome ->
-//                    binding.subscribersCount.text = if (outcome is UseCaseOutcome.Success) {
-//                        outcome.data.toString()
-//                    } else {
-//                        binding.root.context.getString(R.string.fetching_subscribers_count_error)
-//                    }//TODO: present error feedback to user
-//                }
-//            }
         }
     }
 
